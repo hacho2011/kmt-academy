@@ -1,6 +1,6 @@
 import { NewsStore, NewsFeed } from "./types";
 
-export default class Store implements NewsStore {
+export class Store implements NewsStore {
   private feeds: NewsFeed[];
   private _currentPage: number;
 
@@ -25,11 +25,11 @@ export default class Store implements NewsStore {
     return this._currentPage > 1 ? this._currentPage - 1 : 1;
   }
 
-  get numberOfFeed(): number {
+  get numberOfFeed() {
     return this.feeds.length;
   }
 
-  get hasFeeds(): boolean {
+  get hasFeeds() {
     return this.feeds.length > 0;
   }
 
@@ -41,14 +41,14 @@ export default class Store implements NewsStore {
     return this.feeds;
   }
 
-  setFeeds(feeds: NewsFeed[]): void {
+  setFeeds = (feeds: NewsFeed[]) => {
     this.feeds = feeds.map((feed) => ({
       ...feed,
       read: false,
     }));
-  }
+  };
 
-  makeRead(id: number): void {
+  makeRead(id: number) {
     const feed = this.feeds.find((feed: NewsFeed) => feed.id === id);
 
     if (feed) {
